@@ -10,8 +10,7 @@ export async function signup(req, res) {
 				.json({ success: false, message: "All fields are required!" });
 		}
 
-		const emailRegex =
-			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 		if (!emailRegex.test(email)) {
 			return res
@@ -48,6 +47,7 @@ export async function signup(req, res) {
 
 		const image = PROFILE_PICS[Math.floor(Math.random() * PROFILE_PICS.length)];
 
+		// Remove password from the response
 		const newUser = new User({
 			email,
 			password,
@@ -56,6 +56,10 @@ export async function signup(req, res) {
 		});
 
 		await newUser.save();
+
+		res
+			.status(201)
+			.json({ success: true, user: { ...newUser._doc, password: "" } });
 	} catch (err) {
 		console.error("Error at signup controller!", err.message);
 		console.error(err);
