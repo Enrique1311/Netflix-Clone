@@ -58,7 +58,7 @@ export async function signup(req, res) {
 			image,
 		});
 
-		genTokenAndSetCookies(newUser._id, res);
+		genTokenAndSetCookie(newUser._id, res);
 		await newUser.save();
 
 		// Remove password from the response
