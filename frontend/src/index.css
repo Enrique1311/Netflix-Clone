@@ -5,3 +5,15 @@
 .hero-bg {
 	background-image: linear-gradient(#000000a1, #00000028), url("hero.png");
 }
+
+.header-container {
+	@apply max-w-6xl mx-auto flex items-center justify-between p-4;
+}
+
+.section-padding-x {
+	@apply px-4;
+}
+
+.main-button {
+	@apply w-full flex justify-center items-center gap-2 py-2 px-4 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700;
+}

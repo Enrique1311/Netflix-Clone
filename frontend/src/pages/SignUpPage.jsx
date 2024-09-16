@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import MainButton from "../components/MainBtn";
 
 const SignUpPage = () => {
 	const [email, setEmail] = useState(""),
@@ -13,7 +14,7 @@ const SignUpPage = () => {
 
 	return (
 		<div className="hero-bg w-full h-screen">
-			<header className="max-w-6xl mx-auto flex justify-between items-center p-4">
+			<header className="header-container">
 				<Link to={"/"}>
 					<img
 						src="/netflix-logo.png"
@@ -79,9 +80,7 @@ const SignUpPage = () => {
 								onChange={(e) => setPassword(e.target.value)}
 							/>
 						</div>
-						<button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700">
-							Sign Up
-						</button>
+						<MainButton>Sign Up</MainButton>
 					</form>
 					<div className="text-center text-gray-400">
 						Already a member?
