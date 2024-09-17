@@ -3,6 +3,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import HomePage from "./pages/home/HomePage";
 import Footer from "./components/Footer";
+import { Toaster } from "react-hot-toast";
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 				/>
 			</Routes>
 			<Footer />
+			<Toaster />
 		</>
 	);
 }

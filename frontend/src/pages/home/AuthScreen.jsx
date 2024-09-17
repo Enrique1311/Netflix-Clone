@@ -2,11 +2,18 @@ import React from "react";
 import { useState } from "react";
 import MainButton from "../../components/MainBtn";
 import MainLinkBtn from "../../components/MainLinkBtn";
-import { ChevronRight, ChevronUp } from "lucide-react";
-import Footer from "../../components/Footer";
+import { ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AuthScreen = () => {
 	const [email, setEmail] = useState("");
+	const navigate = useNavigate();
+
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
+		navigate("/signup?email=" + email);
+	};
+
 	return (
 		<div className="hero-bg relative">
 			<header className="header-container">
@@ -27,7 +34,10 @@ const AuthScreen = () => {
 				<p className="mb-4">
 					Ready to watch? Enter your email to create or restart your membership.
 				</p>
-				<form className="flex flex-col gap-4 w-1/2 md:flex-row">
+				<form
+					className="flex flex-col gap-4 w-1/2 md:flex-row"
+					onSubmit={handleFormSubmit}
+				>
 					<input
 						type="email"
 						placeholder="Email address"
@@ -155,7 +165,7 @@ const AuthScreen = () => {
 					{/* Right item ***************************/}
 					<div className="flex-1 relative overflow-hidden">
 						<img
-							src="../../../public/device-pile.png"
+							src="/device-pile.png"
 							alt="Device Image"
 							className="relative z-20"
 						/>
