@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import MainButton from "../../components/MainBtn";
 import MainLinkBtn from "../../components/MainLinkBtn";
-import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 
 const AuthScreen = () => {
 	const [email, setEmail] = useState("");
