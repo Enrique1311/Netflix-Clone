@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MainButton from "../components/MainBtn";
+import { useAuthStore } from "../store/authUser";
 
 const LoginPage = () => {
 	const [email, setEmail] = useState(""),
-		[password, setPassword] = useState("");
+		[password, setPassword] = useState(""),
+		{ login } = useAuthStore();
 
 	const handleLogin = (e) => {
 		e.preventDefault();
-		console.log(email, username, password);
+		login({ email, password });
 	};
 
 	return (
@@ -20,8 +22,8 @@ const LoginPage = () => {
 						alt="logo"
 						className="w-52"
 					/>
-				</Link>{" "}
-			</header>{" "}
+				</Link>
+			</header>
 			<div className="flex justify-center items-center mt-20 mx-3">
 				<div className="w-full max-w-md p-8 space-y-6 bg-black/60 rounded-lg shadow-md">
 					<h1 className="text-center text-white text-2xl font-bold mb-4">
