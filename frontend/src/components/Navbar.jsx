@@ -2,6 +2,7 @@ import { LogOut, Menu, Search, X } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authUser";
+import { useContentStore } from "../store/content";
 
 const Navbar = () => {
 	const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -11,6 +12,8 @@ const Navbar = () => {
 	const toggleMobileMenu = () => {
 		setOpenMobileMenu(!openMobileMenu);
 	};
+
+	const { setContentType } = useContentStore();
 
 	return (
 		<header className="header-container">
@@ -28,12 +31,14 @@ const Navbar = () => {
 					<Link
 						to={"/"}
 						className="hover:underline"
+						onClick={() => setContentType("movies")}
 					>
 						Movies
 					</Link>
 					<Link
 						to={"/"}
 						className="hover:underline"
+						onClick={() => setContentType("series")}
 					>
 						Series
 					</Link>

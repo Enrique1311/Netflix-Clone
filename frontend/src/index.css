@@ -17,3 +17,18 @@
 .main-button {
 	@apply w-full flex justify-center items-center gap-2 py-2 px-4 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700;
 }
+
+.shimmer {
+	animation: shimmer 2s infinite linear;
+	background: linear-gradient(to right, black 4%, #232323 25%, black 36%);
+	background-size: 1000 px 100%;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -1000px 0;
+	}
+	100% {
+		background-position: 1000px 0;
+	}
+}
