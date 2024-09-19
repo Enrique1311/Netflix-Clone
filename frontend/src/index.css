@@ -7,7 +7,7 @@
 }
 
 .header-container {
-	@apply max-w-6xl mx-auto flex items-center justify-between p-4;
+	@apply max-w-6xl h-16 mx-auto flex items-center justify-between p-4;
 }
 
 .section-padding-x {

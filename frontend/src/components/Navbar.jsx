@@ -1,9 +1,12 @@
-import { Search } from "lucide-react";
+import { LogOut, Menu, Search, X } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/authUser";
 
 const Navbar = () => {
 	const [openMobileMenu, setOpenMobileMenu] = useState(false);
+
+	const { user, logout } = useAuthStore();
 
 	const toggleMobileMenu = () => {
 		setOpenMobileMenu(!openMobileMenu);
@@ -41,38 +44,58 @@ const Navbar = () => {
 						Search History
 					</Link>
 				</div>
-				<div className="flex gap-4 items-center z-50">
-					<Link to={"/history"}>
-						<Search className="size-6 cursor-pointer" />{" "}
+			</div>{" "}
+			<div className="flex gap-3 items-center z-50">
+				<Link to={"/search"}>
+					<Search className="size-6 cursor-pointer" />
+				</Link>
+				<img
+					src="/avatar1.png"
+					alt="Avatar"
+					className="h-8 rounded cursor-pointer"
+				/>
+				<LogOut
+					className="size-6 cursor-pointer"
+					onClick={logout}
+				/>
+				<div className="sm:hidden">
+					{!openMobileMenu ? (
+						<Menu
+							className="size-6 cursor-pointer"
+							onClick={toggleMobileMenu}
+						/>
+					) : (
+						<X
+							className="size-6 cursor-pointer"
+							onClick={toggleMobileMenu}
+						/>
+					)}
+				</div>
+			</div>
+			{/* Mobile nabvar *******************************/}
+			{openMobileMenu && (
+				<div className="absolute w-fit top-16 right-1 p-4 z-50 bg-black border border-gray-600 rounded sm:hidden">
+					<Link
+						to={"/"}
+						className="block p-2 hover:underline"
+						onClick={toggleMobileMenu}
+					>
+						Movies
+					</Link>
+					<Link
+						to={"/"}
+						className="block p-2 hover:underline"
+					>
+						Series
+					</Link>
+					<Link
+						to={"/search"}
+						className="block p-2 hover:underline"
+					>
+						Search History
 					</Link>
 				</div>
-
-				{/* Mobile nabvar *******************************/}
-
-				{openMobileMenu && (
-					<div className="w-full mt-4 z-50 bg-black border border-gray-800 rounded sm:hidden">
-						<Link
-							to={"/"}
-							className="block p-2 hover:underline"
-							onClick={toggleMobileMenu}
-						>
-							Movies
-						</Link>
-						<Link
-							to={"/"}
-							className="block p-2 hover:underline"
-						>
-							Series
-						</Link>
-						<Link
-							to={"/history"}
-							className="block p-2 hover:underline"
-						>
-							Search History
-						</Link>
-					</div>
-				)}
-			</div>
+			)}
 		</header>
 	);
 };
