@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 import { Info, Play } from "lucide-react";
 import useGetTrendingContent from "../../hooks/useGetTrendingContent";
-import { ORIGINAL_IMG_BASE_URL } from "../../utils/constants";
+import {
+	ORIGINAL_IMG_BASE_URL,
+	MOVIE_CATEGORIES,
+	SERIES_CATEGORIES,
+} from "../../utils/constants";
+import { useContentStore } from "../../store/content";
+import MovieSlider from "../../components/ContentSlider";
 
 const HomeScreen = () => {
 	const { trendingContent } = useGetTrendingContent();
+	const { contentType } = useContentStore();
+	const [loadingImage, setLoadingImage] = useState(true);
 
 	if (!trendingContent)
 		return (
@@ -18,12 +26,19 @@ const HomeScreen = () => {
 
 	return (
 		<>
-			<div className="relative h-screen text-white">
+			{/* Hero section **************************************/}
+			<section className="relative h-screen text-white">
 				<Navbar />
+				{loadingImage && (
+					<div className="shimmer absolute top-0 left-0 w-full h-full bg-black/70 flex justify-center items-center -z-10"></div>
+				)}
 				<img
 					src={ORIGINAL_IMG_BASE_URL + trendingContent?.backdrop_path}
 					alt="Image"
 					className="absolute top-0 right-0 w-full h-full object-cover -z-50"
+					onLoad={() => {
+						setLoadingImage(false);
+					}}
 				/>
 				<div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center px-8 md:px-16 lg:px-32">
 					<div className="absolute bg-gradient-to-b from-black via-black/50 to-black/50 w-full h-full top-0 left-0 -z-10"></div>
@@ -59,7 +74,24 @@ const HomeScreen = () => {
 						</Link>
 					</div>
 				</div>
-			</div>
+			</section>
+
+			{/* Sliders section ***********************************/}
+			<section className="flex flex-col gap-10 bg-black py-10">
+				{contentType === "movies"
+					? MOVIE_CATEGORIES.map((category) => (
+							<MovieSlider
+								key={category}
+								category={category}
+							/>
+					  ))
+					: SERIES_CATEGORIES.map((category) => (
+							<MovieSlider
+								key={category}
+								category={category}
+							/>
+					  ))}
+			</section>
 		</>
 	);
 };
