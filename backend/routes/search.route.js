@@ -13,7 +13,7 @@ router.get("/person/:query", searchPerson);
 router.get("/movie/:query", searchMovie);
 router.get("/series/:query", searchSeries);
 
-router.get("/history", getSearchHistory);
+router.get("/search", getSearchHistory);
 
 router.delete("/history/:id", removeItemFromSearchHitory);
 

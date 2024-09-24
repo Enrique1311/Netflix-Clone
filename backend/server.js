@@ -14,10 +14,10 @@ const PORT = ENV_VARS.PORT;
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/auth", authRoutes);
-app.use("/movies", protectRoute, moviesRoutes);
-app.use("/series", protectRoute, seriesRoutes);
-app.use("/search", protectRoute, searchRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/movies", protectRoute, moviesRoutes);
+app.use("/api/v1/series", protectRoute, seriesRoutes);
+app.use("/api/v1/search", protectRoute, searchRoutes);
 
 app.listen(PORT, () => {
 	console.log("Listening at http://localhost:" + PORT);
